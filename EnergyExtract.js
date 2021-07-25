@@ -4,13 +4,12 @@ if (localStorage.dateData){
 	dateData = JSON.parse(localStorage.dateData); // retrieve saved values to avoid excessive requests
 	
 	let dateIndex = Object.getOwnPropertyNames(dateData); // +3 Update date request to have oldest data
-	let oldest=dates[dates.length -1]; // assumes descending sort & only 1 years worth of data
+	let oldest=dateIndex[dateIndex.length -1]; // assumes descending sort & only 1 years worth of data
 	date = new Date(oldest);
 }
 
-var days = 30; // lets not spam requests until this is done //365*years;
+var days = -1; // lets not spam requests until this is done //365*years;
 
-var data = [];
 let dateFormatter = new Intl.DateTimeFormat("en" , {
       year: "2-digit",
   month: "2-digit",
@@ -49,7 +48,10 @@ var request =
 		dataType: "json",
 		data: JSON.stringify(request),
 		success: function(n) {
-			data.push(n);
+			let usageByHour=JSON.parse(n.d).objUsageGenerationResultSetTwo;
+			if (usageByHour.length>0 && usageByHour[0].UsageDate){
+				dateData[usageByHour[0].UsageDate]=usageByHour;
+			}
 			setTimeout(requestHourlyData,1000);
 		},
 		error: function(n) {
