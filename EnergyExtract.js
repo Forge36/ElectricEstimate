@@ -1,5 +1,15 @@
-var days = 2; // lets not spam requests until this is done //365*years;
-var date = new Date();
+var dateData = {};
+var date = new Date(); // default to today
+if (localStorage.dateData){
+	dateData = JSON.parse(localStorage.dateData); // retrieve saved values to avoid excessive requests
+	
+	let dateIndex = Object.getOwnPropertyNames(dateData); // +3 Update date request to have oldest data
+	let oldest=dates[dates.length -1]; // assumes descending sort & only 1 years worth of data
+	date = new Date(oldest);
+}
+
+var days = 30; // lets not spam requests until this is done //365*years;
+
 var data = [];
 let dateFormatter = new Intl.DateTimeFormat("en" , {
       year: "2-digit",
@@ -13,6 +23,8 @@ var requestHourlyData = function(){
 date.setDate(date.getDate()-1); // move to previous day
 if (days<0){
 	debugger;
+	localStorage.setItem("dateData",JSON.stringify(dateData)); //save latest data
+	return; // quit
 }
 days--;
 var request =
