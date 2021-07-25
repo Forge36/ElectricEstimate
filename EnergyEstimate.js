@@ -6,6 +6,21 @@
 // UsageDate: "07/19/21"
 // UsageValue: 2.87
 // WeatherUsageDate: "07/19/21"
+
+var usageByHour=[];
+var flattenResponse = function(){
+	usageByHour=[];
+	//translate usage by day into flat list
+	var dateList = Object.getOwnPropertyNames(dateData);
+	for (var i=0;i<dateList.length;i++){
+		var singleResponse = dateData[dateList[i]];
+		for (var j=0;j<singleResponse.length;j++){
+			usageByHour.push(singleResponse[j]);
+		}
+}
+}
+flattenResponse();
+
 var costTypes= [{ 
 		Start: "05/16",
 		End: "09/15",
@@ -19,13 +34,13 @@ var costTypes= [{
 		Start: "09/16",
 		End: "05/15",
 		PeakStart: "07:00",
-		Standard: 0.9969,
+		Standard: 0.09969,
 		PeakRate: 0.13957,
 		PeakEnd: "20:00",
 		OffPeak: 0.04985,
 	}
 ]
-debugger;
+var estimateCost = function(){
 var cost = 0;
 var standardCost = 0;
 for (var usageIndex=0;usageIndex<usageByHour.length;usageIndex++){
@@ -74,5 +89,6 @@ for (var usageIndex=0;usageIndex<usageByHour.length;usageIndex++){
 		cost += usage.UsageValue*costTypes[season].OffPeak;
 	}
 }
-console.log(cost);
-console.log(standardCost);
+GUI.innerHTML = "With Off-Peak: " + cost + "</br>Standard Cost: " + standardCost
+}
+estimateCost();
