@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         New Userscript
+// @name         ElectricEstimate
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
@@ -26,10 +26,11 @@
 
         let dateIndex = Object.getOwnPropertyNames(dateData); // +3 Update date request to have oldest data
         let oldest=dateIndex[dateIndex.length -1]; // assumes descending sort
-        date = new Date(oldest);
+        date = new Date(oldest); // when cache data exist set load start to today
+		// TODO: support fetching data newer than first run
     }
 
-    var days = -1; // lets not spam requests until this is done //365*years;
+    var days = -1; // lets not spam requests until this is done
 
     let dateFormatter = new Intl.DateTimeFormat("en" , {
         year: "2-digit",
