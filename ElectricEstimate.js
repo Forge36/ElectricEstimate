@@ -25,7 +25,7 @@
         dateData = JSON.parse(localStorage.dateData); // retrieve saved values to avoid excessive requests
 
         let dateIndex = Object.getOwnPropertyNames(dateData); // +3 Update date request to have oldest data
-        let oldest=dateIndex[dateIndex.length -1]; // assumes descending sort & only 1 years worth of data
+        let oldest=dateIndex[dateIndex.length -1]; // assumes descending sort
         date = new Date(oldest);
     }
 
@@ -36,7 +36,6 @@
         month: "2-digit",
         day: "2-digit",
     });
-
 
     var requestHourlyData = function(){
         // should space our requests more
@@ -115,16 +114,16 @@
         PeakEnd: "20:00",
         OffPeak: 0.05843,
     },
-                    {
-                        Start: "09/16",
-                        End: "05/15",
-                        PeakStart: "07:00",
-                        Standard: 0.09969,
-                        PeakRate: 0.13957,
-                        PeakEnd: "20:00",
-                        OffPeak: 0.04985,
-                    }
-                   ]
+	{
+		Start: "09/16",
+		End: "05/15",
+		PeakStart: "07:00",
+		Standard: 0.09969,
+		PeakRate: 0.13957,
+		PeakEnd: "20:00",
+		OffPeak: 0.04985,
+	}
+   ]
     var estimateCost = function(){
         var cost = 0;
         var standardCost = 0;
