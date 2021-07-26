@@ -9,7 +9,6 @@ Couple of pain points:
 2) To compare rates I need know both the day, and hour the power was consumed.
 3) Alliant locks me into the rate plan for 12 months. 
 
-
 My solution:
 1) Script hourly data retrieval
 2) Implement estimate tool based on peak/off-peak usage rate
@@ -18,4 +17,25 @@ My solution:
 In effect: This a tool lets me compare the two rates based on my historical usage. From there I determine if I would have paid more or less by switching the previous year.
 
 Assumption: Next years usage will closely follow this year.
-Caveats: There was a pandemic and I've been home more than ever before.
+Caveats: There was a pandemic and I've been home more than ever before during peak hours. This means future data (should) be a larger gap.
+
+Electric Rates:
+From May 16 to September 15
+
+
+| | RATE 400 | RATE 407 | RATE 407 |
+| - | -------- | ----------- | ------------ |
+| | Standard | TOD On-Peak | TOD Off-Peak |
+| First 16.438 kWh/Day or first 500 kWh/Mo |	$0.11685/kWh | $0.16359/kWh | $0.05843/kWh |
+| Next 23.014 kWh/Day or next 700 kWh/Mo | $0.11685/kWh | $0.16359/kWh | $0.05843/kWh |
+| Over 39.452 kWh/Day or over 1,200 kWh/Mo	| $0.11685/kWh | $0.16359/kWh | $0.05843/kWh |
+
+Winter energy charge
+From September 16 to May 15
+
+|   | RATE 400 | RATE 407 | RATE 407 |
+| - | -------- | ----------- | ------------ |
+|   | Standard   | TOD On-Peak | TOD Off-Peak |
+|First 16.438 kWh/Day or first 500 kWh/Mo |	$0.09969/kWh | $0.13957/kWh | $0.04985/kWh |
+| Next 23.014 kWh/Day or next 700 kWh/Mo | $0.07721/kWh | $0.10809/kWh | $0.03861/kWh |
+| Over 39.452 kWh/Day or over 1,200 kWh/Mo | $0.03932/kWh | $0.05505/kWh| $0.01966/kWh |
