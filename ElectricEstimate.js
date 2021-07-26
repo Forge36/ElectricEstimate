@@ -19,7 +19,8 @@
 	GUI.style.marginTop="600px";
 	document.body.insertBefore(GUI,document.body.children[0]);
 
-    var dateData = {};
+    var meterNumber;
+	var dateData = {};
     var date = new Date(); // default to today
     if (localStorage.dateData){
         dateData = JSON.parse(localStorage.dateData); // retrieve saved values to avoid excessive requests
@@ -137,8 +138,8 @@
         date.setDate(date.getDate()-1); // move to previous day
         if (days<0){
             localStorage.setItem("dateData",JSON.stringify(dateData)); //save latest data
-			flattenResponse();
-			estimateCost();
+            flattenResponse();
+            estimateCost();
             return; // quit
         }
         days--;
@@ -146,7 +147,7 @@
             {
                 DateFromDaily: "",
                 DateToDaily: "",
-                MeterNumber: "740382",
+                MeterNumber: meterNumber,
                 Mode: "H",
                 SeasonId: 0,
                 Type: "K",
@@ -176,5 +177,14 @@
             }
         });
     }
-    requestHourlyData(); // TODO: turn into button
+	var ajaxOrig = $.ajax;
+    $.ajax = function() {
+		if (arguments[0] && arguments[0].url === "Usages.aspx/LoadUsage" && !meterNumber){
+            // intercept request to load data to cache meterNumber
+            var data = JSON.parse(arguments[0].data);
+            meterNumber = data.MeterNumber;
+            requestHourlyData();
+        }
+		ajaxOrig.apply($,arguments);
+	}
 })();
