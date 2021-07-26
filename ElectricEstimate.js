@@ -38,51 +38,6 @@
         day: "2-digit",
     });
 
-    var requestHourlyData = function(){
-        // should space our requests more
-        date.setDate(date.getDate()-1); // move to previous day
-        if (days<0){
-            debugger;
-            localStorage.setItem("dateData",JSON.stringify(dateData)); //save latest data
-            return; // quit
-        }
-        days--;
-        var request =
-            {
-                DateFromDaily: "",
-                DateToDaily: "",
-                MeterNumber: "740382",
-                Mode: "H",
-                SeasonId: 0,
-                Type: "K",
-                UsageOrGeneration: "1",
-                hourlyType: "H",
-                strDate: dateFormatter.format(date), //"07/19/21", // need to translate from date in loop + range
-                usageyear: "",
-                weatherOverlay: 0
-            }
-
-        $.ajax({
-            type: "POST",
-            url: "Usages.aspx/LoadUsage",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            data: JSON.stringify(request),
-            success: function(n) {
-                let usageByHour=JSON.parse(n.d).objUsageGenerationResultSetTwo;
-                if (usageByHour.length>0 && usageByHour[0].UsageDate){
-                    dateData[usageByHour[0].UsageDate]=usageByHour;
-                }
-                setTimeout(requestHourlyData,1000);
-            },
-            error: function(n) {
-                console.log(n.message);
-                loader.hideloader()
-            }
-        });
-    }
-    requestHourlyData();
-
     // DemandValue: 2.87
     // GenerationValue: 0
     // GenerationValueColorCode: "#fcb119"
@@ -104,7 +59,6 @@
             }
         }
     }
-    flattenResponse();
 
     var costTypes= [{
         Start: "05/16",
@@ -177,5 +131,50 @@
         }
         GUI.innerHTML = "With Off-Peak: " + cost + "</br>Standard Cost: " + standardCost
     }
-    estimateCost();
+
+    var requestHourlyData = function(){
+        // should space our requests more
+        date.setDate(date.getDate()-1); // move to previous day
+        if (days<0){
+            localStorage.setItem("dateData",JSON.stringify(dateData)); //save latest data
+			flattenResponse();
+			estimateCost();
+            return; // quit
+        }
+        days--;
+        var request =
+            {
+                DateFromDaily: "",
+                DateToDaily: "",
+                MeterNumber: "740382",
+                Mode: "H",
+                SeasonId: 0,
+                Type: "K",
+                UsageOrGeneration: "1",
+                hourlyType: "H",
+                strDate: dateFormatter.format(date), //"07/19/21", // need to translate from date in loop + range
+                usageyear: "",
+                weatherOverlay: 0
+            }
+
+        $.ajax({
+            type: "POST",
+            url: "Usages.aspx/LoadUsage",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(request),
+            success: function(n) {
+                let usageByHour=JSON.parse(n.d).objUsageGenerationResultSetTwo;
+                if (usageByHour.length>0 && usageByHour[0].UsageDate){
+                    dateData[usageByHour[0].UsageDate]=usageByHour;
+                }
+                setTimeout(requestHourlyData,1000);
+            },
+            error: function(n) {
+                console.log(n.message);
+                loader.hideloader()
+            }
+        });
+    }
+    requestHourlyData(); // TODO: turn into button
 })();
