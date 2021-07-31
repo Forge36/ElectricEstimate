@@ -228,7 +228,6 @@
             }
         });
     }
-	debugger;
     var ajaxOrig = $.ajax;
     $.ajax = function() {
 		if (arguments[0] && arguments[0].url === "Usages.aspx/LoadUsage" && !meterNumber){
