@@ -19,11 +19,23 @@ In effect: This a tool lets me compare the two rates based on my historical usag
 Assumption: Next years usage will closely follow this year.
 Caveats: There was a pandemic and I've been home more than ever before during peak hours. This means future data (should) be a larger gap.
 
+# GUI
+* Cost based on usage using Off-Peak rates
+* Cost based on usage using flat rate
+* Oldest loaded data 
+* Newest loaded data 
+* Number of days to lookup data for
+* Requesting older data starts at oldest data day
+* Requesting newer data starts at newest data day
 
-# Peak Hours
+![GUI](GUI.png)
+
+# Utility Rate Information
+
+## Peak Hours
 All the electricity you use during off-peak hours ─ 8 p.m. until 7 a.m. Monday through Friday during the week and, all hours every weekend and some holidays ─ are billed at a 50% discount.
 
-# Electric Rates
+## Seasonal Rates
 From May 16 to September 15
 
 | | RATE 400 | RATE 407 | RATE 407 |
