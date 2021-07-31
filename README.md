@@ -1,7 +1,7 @@
 # ElectricEstimate
 Purpose: Provide an easy method to compare various electric rate plans with Alliant Energy.
 
-Background: My energy providers allows me to switch how I pay for electricity between "fixed rate" and "off-peak variable rates".
+Background: My energy provider allows me to switch how I pay for electricity between "fixed rate" and "off-peak variable rates".
 Depending on how my electricity is charged I may receive a discount *OR* I pay more.
 
 Couple of pain points:
