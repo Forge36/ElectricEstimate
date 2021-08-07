@@ -1,25 +1,12 @@
 # ElectricEstimate
-Purpose: Provide an easy method to compare various electric rate plans with Alliant Energy.
+An easier method to compare two electric rate plans with Alliant Energy.
 
-Background: My energy provider allows me to switch how I pay for electricity between "fixed rate" and "off-peak variable rates".
-Depending on how my electricity is charged I may receive a discount *OR* I pay more.
+## Data Retrieval Considerations
+1) Hourly day is available in 24 hour chunks
+2) I don't know if I'm rate limited (IE: I'll try not to spam requests, or repeat requests by caching historical data)
+3) No offical API identified for data export
 
-Couple of pain points:
-1) I can only export daily usage one day at a time in the GUI.
-2) To compare rates I need know both the day, and hour the power was consumed.
-3) Alliant locks me into the rate plan for 12 months. 
-
-My solution:
-1) Script hourly data retrieval
-2) Implement estimate tool based on peak/off-peak usage rate
-3) Basic GUI to show the comparison (in dollars)
-
-In effect: This a tool lets me compare the two rates based on my historical usage. From there I determine if I would have paid more or less by switching the previous year.
-
-Assumption: Next years usage will closely follow this year.
-Caveats: There was a pandemic and I've been home more than ever before during peak hours. This means future data (should) be a larger gap.
-
-# GUI
+## GUI
 * Cost based on usage using Off-Peak rates
 * Cost based on usage using flat rate
 * Oldest loaded data 
@@ -30,7 +17,14 @@ Caveats: There was a pandemic and I've been home more than ever before during pe
 
 ![GUI](GUI.png)
 
-# Utility Rate Information
+# Background
+1) Alliant provider allows me to choose how I pay for electricity between "fixed rate" and "off-peak variable rates".
+2) Locked into the rate plan for 12 months. 
+3) No guarantees that switching has reduced costs. I may receive a discount *OR* I pay more.
+ 
+## Assumptions
+1) Next years usage will closely follow this year.
+2) There was a pandemic and I've been home more than ever before during peak hours. This means future data (should) be a larger gap.
 
 ## Peak Hours
 All the electricity you use during off-peak hours ─ 8 p.m. until 7 a.m. Monday through Friday during the week and, all hours every weekend and some holidays ─ are billed at a 50% discount.
