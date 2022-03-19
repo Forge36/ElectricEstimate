@@ -37,9 +37,9 @@ An easier method to compare two electric rate plans with Alliant Energy.
 
 ## Seasonal
 
-| | Rg-1 Residential | Rg-5 Residential | Rd-1 Residential|
-| | Default Flat | Time-Of-Use | Demand rate  + Time-of-Use |
-| $/kWh | -------------- | ---------------- | ------------- |
+|  | Rg-1 Residential | Rg-5 Residential | Rd-1 Residential  |
+| - | -------------- | ---------------- | ------------- |
+| $/kWh | Default Flat | Time-Of-Use | Demand rate  + Time-of-Use |
 | All kWh |	0.13091      |                  |               |
 | High rate |            | 0.19600          | 0.17520       |
 | Regular rate |         | 0.16300          | 0.13400       |
